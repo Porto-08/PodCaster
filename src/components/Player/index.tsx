@@ -44,7 +44,12 @@ const Player = () => {
 
     audioRef.current.addEventListener("timeupdate", () => {
       setProgress(Math.floor(audioRef.current.currentTime));
-    }); 
+    });
+  }
+
+  function handleSeek(amount: number) {
+    audioRef.current.currentTime = amount;
+    setProgress(amount);
   }
 
   const episode = episodeList[currentEpisodeIndex];
@@ -53,7 +58,7 @@ const Player = () => {
     <div className={styles.playerContainer}>
       <header>
         <img src="/playing.svg" alt="Tocando Agora" />
-        <strong>Tocando Agora </strong>
+        <strong>Tocando Agora</strong>
       </header>
 
       {episode ? (
@@ -80,6 +85,9 @@ const Player = () => {
           <div className={styles.slider}>
             {episode ? (
               <Slider
+                max={episode.duration}
+                value={progress}
+                onChange={handleSeek}
                 trackStyle={{ backgroundColor: "#04d361" }}
                 railStyle={{ backgroundColor: "#9f75ff" }}
                 handleStyle={{ borderColor: "#04d361", borderWidth: "3px" }}
