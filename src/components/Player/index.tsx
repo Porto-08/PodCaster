@@ -12,6 +12,8 @@ const Player = () => {
   const {
     episodeList,
     currentEpisodeIndex,
+    isLooping,
+    isShuffling,
     isPlaying,
     hasNext,
     hasPrevious,
@@ -19,6 +21,8 @@ const Player = () => {
     setPlayingState,
     playPrevious,
     playNext,
+    toggleLoop,
+    toggleShuffle,
   } = usePlayer();
 
   useEffect(() => {
@@ -84,11 +88,18 @@ const Player = () => {
             src={episode.url}
             autoPlay
             ref={audioRef}
+            loop={isLooping}
+            
           />
         )}
 
         <div className={styles.buttons}>
-          <button type="button" disabled={!episode}>
+          <button 
+            type="button" 
+            disabled={!episode || episodeList.length === 1}
+            onClick={toggleShuffle}
+            className={isShuffling ? styles.isActive : ''}
+          >
             <img src="/shuffle.svg" alt="Emparalhar" />
           </button>
 
@@ -121,7 +132,12 @@ const Player = () => {
             <img src="/play-next.svg" alt="Tocar Proximo" />
           </button>
 
-          <button type="button" disabled={!episode}>
+          <button 
+            type="button" 
+            disabled={!episode}
+            onClick={toggleLoop}
+            className={isLooping ? styles.isActive : ''}
+          >
             <img src="/repeat.svg" alt="Repetir" />
           </button>
         </div>
