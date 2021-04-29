@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import { format, parseISO } from "date-fns";
 import ptBr from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
@@ -26,14 +27,15 @@ interface HomeProps {
 }
 
 export default function Home({ lastestEpisodes, allEpisodes }: HomeProps) {
-  const { playlist } = usePlayer()
-
+  const { playlist } = usePlayer();
   const episodeList = [...lastestEpisodes, ...allEpisodes];
-
-
 
   return (
     <div className={styles.homePage}>
+      <Head>
+        <title>Home | PodCastr</title>
+      </Head>
+
       <section className={styles.lastestEpisodes}>
         <h2>Ultimos Lançamentos</h2>
 
@@ -60,7 +62,10 @@ export default function Home({ lastestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button" onClick={() => playlist(episodeList, index)}>
+                <button
+                  type="button"
+                  onClick={() => playlist(episodeList, index)}
+                >
                   <img src="/play-green.svg" alt="Tocar Episodio" />
                 </button>
               </li>
@@ -106,7 +111,13 @@ export default function Home({ lastestEpisodes, allEpisodes }: HomeProps) {
                   <td>{episode.durationAsString}</td>
                   <td>
                     <button type="button">
-                      <img src="/play-green.svg" alt="Tocar Episodio" onClick={() => playlist(episodeList, index + lastestEpisodes.length)}/>
+                      <img
+                        src="/play-green.svg"
+                        alt="Tocar Episodio"
+                        onClick={() =>
+                          playlist(episodeList, index + lastestEpisodes.length)
+                        }
+                      />
                     </button>
                   </td>
                 </tr>

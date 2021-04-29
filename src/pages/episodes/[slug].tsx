@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 import Link from "next/link";
+import Head from "next/head";
 import ptBr from "date-fns/locale/pt-BR";
 import Image from "next/image";
 import styles from "./episode.module.scss";
@@ -25,11 +26,13 @@ interface EpisodeProps {
 }
 
 export default function Episode({ episode }: EpisodeProps) {
-
-  const { play } = usePlayer()
+  const { play } = usePlayer();
 
   return (
     <div className={styles.episode}>
+      <Head>
+        <title>Home | {episode.title}</title>
+      </Head>
       <div className={styles.thumbnailContainer}>
         <Link href="/ ">
           <button type="button">
@@ -74,13 +77,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   });
 
-  const paths = data.map(episode => {
+  const paths = data.map((episode) => {
     return {
       params: {
-        slug: episode .id
-      }
-    }
-  })
+        slug: episode.id,
+      },
+    };
+  });
 
   return {
     paths,
