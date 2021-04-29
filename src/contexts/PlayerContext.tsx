@@ -62,7 +62,7 @@ export function PlayerContextProvider({
       setCurrentEpisodeIndex(nextRandomEpisodeIndex);
     } else if (hasNext) {
       setCurrentEpisodeIndex(currentEpisodeIndex + 1);
-    }
+    } 
   }
 
   function playPrevious() {
