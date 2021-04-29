@@ -6,6 +6,7 @@ import Link from "next/link";
 import ptBr from "date-fns/locale/pt-BR";
 import Image from "next/image";
 import styles from "./episode.module.scss";
+import { usePlayer } from "../../contexts/PlayerContext";
 
 interface Episode {
   id: string;
@@ -24,6 +25,9 @@ interface EpisodeProps {
 }
 
 export default function Episode({ episode }: EpisodeProps) {
+
+  const { play } = usePlayer()
+
   return (
     <div className={styles.episode}>
       <div className={styles.thumbnailContainer}>
@@ -41,7 +45,7 @@ export default function Episode({ episode }: EpisodeProps) {
           alt="thumbnail"
         />
 
-        <button type="button">
+        <button type="button" onClick={() => play(episode)}>
           <img src="/play.svg" alt="Tocar Episodeo" />
         </button>
       </div>
