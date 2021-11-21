@@ -4,7 +4,7 @@ Projeto realizado junto a NLW.
 # Introdução 
 - Projeto consiste em uma aplicação de ouvir podcasts; 
 - Usuário pode ver detalhes sobre um projeto específico;
-- Realizado com Typescript e NextJs;
+- Realizado com Typescript e NextJs.
 
 ![Wildbeast](https://user-images.githubusercontent.com/60657968/134013353-f0541e73-9937-40f8-a118-3eb045cbcd2b.png)
 
